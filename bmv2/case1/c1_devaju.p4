@@ -1,5 +1,5 @@
 #include <core.p4>
-#include <tna.p4>
+#include <v1model.p4>
 
 
 const bit<16> TYPE_NSH = 0x894f;
@@ -173,6 +173,7 @@ struct metadata_t {
 
 
 
+
 /*************************************************************************
 *********************** P A R S E R  ***********************************
 *************************************************************************/
@@ -315,7 +316,6 @@ control SwitchIngress(
         hdr.ipv4.dstAddr = dst_ip;
         nat_update_l4_checksum();
         ig_tm_md.ucast_egress_port = port; 
-        //ig_tm_md.bypass_egress     = true;
         meta.metadata_si = meta.metadata_si - 1;
     }
 
@@ -386,7 +386,7 @@ control SwitchIngress(
         meta.ipv4_metadata.lkp_ipv4_da = nhop_ipv4;
         hdr.ipv4.dstAddr = nhop_ipv4;
         ig_tm_md.ucast_egress_port = port;
-        meta.metadata_si = meta.metadata_si - 1;
+        hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
     }
 
     action rewrite_mac(bit<48> smac) {
@@ -416,20 +416,19 @@ control SwitchIngress(
         hdr.ipv4.dstAddr = meta.ipv4_metadata.lkp_ipv4_da;
         hdr.out_ethernet.srcAddr = meta.l2_metadata.srcAddr;
         hdr.out_ethernet.dstAddr = meta.l2_metadata.dstAddr;
-        hdr.in_ethernet.srcAddr = ig_prsr_md.global_tstamp;
     }
 
-    action sff_forward_no_tstamp() {
-
+    action loopback() {  
+        ig_tm_md.ucast_egress_port = 68;
         hdr.nsh.spi = meta.metadata_spi;
         hdr.nsh.si = meta.metadata_si;
         hdr.ipv4.srcAddr = meta.ipv4_metadata.lkp_ipv4_sa;
         hdr.ipv4.dstAddr = meta.ipv4_metadata.lkp_ipv4_da;
         hdr.out_ethernet.srcAddr = meta.l2_metadata.srcAddr;
         hdr.out_ethernet.dstAddr = meta.l2_metadata.dstAddr;
-    }
-/****************** Ingress Tables*******************/
+    } 
 
+/****************** Ingress Tables*******************/
 
 // SF1_NAT Table
     table nat_twice {
@@ -575,20 +574,6 @@ control SwitchIngress(
         default_action = NoAction();
     }
 
-    table l32 {
-        key     = { 
-            meta.ipv4_metadata.lkp_ipv4_da : exact;
-            meta.metadata_spi: exact;
-            meta.metadata_si: exact;
-        }
-        actions = {
-            send;
-            drop;
-            NoAction;
-        }
-        default_action = NoAction();
-    }
-
     table fw {
         key = {
             meta.l2_metadata.srcAddr : exact;
@@ -612,8 +597,8 @@ control SwitchIngress(
         actions = {
             sff_forward;
             drop;
+            loopback;
             NoAction;
-            sff_forward_no_tstamp;
         }
         
         default_action = sff_forward();
@@ -654,76 +639,42 @@ control SwitchIngress(
         }
     }
 
-    table l2 {
-        key = {
-            meta.l2_metadata.dstAddr : exact;
-            meta.metadata_spi: exact;
-            meta.metadata_si: exact;
-        }
-        actions = {
-            send;
-            NoAction;
-        }
-        
-        default_action = NoAction();
-    }
 
 // apply
 
     apply{
+        if(ig_intr_md.ingress_port != 68){
+            hdr.in_ethernet.srcAddr = ig_prsr_md.global_tstamp;
+        }
         meta.nat_metadata.ingress_nat_mode = 1;
         change_hdr_to_meta(); //
 
-        
-        //SF1_LB
-        if(hdr.nsh.spi==2|| hdr.nsh.spi==4){
-            ecmp_group.apply();
-            ecmp_nhop.apply();
-            // send_frame.apply();
-        }
-
         //SF2_FW
-        if(hdr.nsh.spi==1 || hdr.nsh.spi==2 || hdr.nsh.spi==3){
-            fw.apply();
-        }
+        fw.apply();
 
         //SF3_NAT
-        if(hdr.nsh.spi==1 || hdr.nsh.spi==3 || hdr.nsh.spi==4){
-            if(meta.nat_metadata.ingress_nat_mode ==0){
-                nat_twice.apply();       
-            }
-            else if(meta.nat_metadata.ingress_nat_mode == 1){
-                nat_dst.apply();
-            }
-            else if(meta.nat_metadata.ingress_nat_mode == 2){
-                nat_src.apply();
-            }
-            else if(meta.nat_metadata.ingress_nat_mode == 3){
-                nat_flow.apply();
-            }
-            egress_nat.apply();
+        if(meta.nat_metadata.ingress_nat_mode ==0){
+            nat_twice.apply();       
         }
-
-        if(hdr.nsh.spi==3){
-            l2.apply();
+        else if(meta.nat_metadata.ingress_nat_mode == 1){
+            nat_dst.apply();
         }
+        else if(meta.nat_metadata.ingress_nat_mode == 2){
+            nat_src.apply();
+        }
+        else if(meta.nat_metadata.ingress_nat_mode == 3){
+            nat_flow.apply();
+        }
+        egress_nat.apply();
 
         //SF4_L3
-        if(hdr.nsh.spi==1 || hdr.nsh.spi==3){
-            l3.apply();
-        }
+        l3.apply();
         
         //SF1'_LB
-        if(hdr.nsh.spi==2 || hdr.nsh.spi==3){
-            ecmp_group2.apply();
-            ecmp_nhop2.apply();
-            // send_frame2.apply();
-        }
+        ecmp_group.apply();
+        ecmp_nhop.apply();
+        send_frame.apply();
         
-        if(hdr.nsh.spi==3){
-            l32.apply();
-        }
-
         sff.apply();
     }
 }

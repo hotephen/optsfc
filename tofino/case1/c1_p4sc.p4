@@ -140,13 +140,11 @@ struct ipv4_metadata_t {
     bit<2>    ipv4_urpf_mode;            /* 0: none, 1: strict, 3: loose */
 }
 
-//SF1 metadata
 struct pkt_id_t {
     bit<32> id;
     bit<32> next_id;
 }
 
-//SF2 metadata
 struct nat_metadata_t {
     bit<2>  ingress_nat_mode;           /* 0: none, 1: inside, 2: outside */
     bit<2>  egress_nat_mode;            /* nat mode of egress_bd */
@@ -159,7 +157,6 @@ struct nat_metadata_t {
     bit<16> l4_len;                     /* l4 length */
 }
 
-// Total SFC metadata
 struct metadata_t {
     // Basic
     bit<24> metadata_spi;
@@ -174,9 +171,6 @@ struct metadata_t {
     bit<48> ingress_timestamp;
 }
 
-
-// Register<bit<48>,bit<1>>(1024,0)  ingress_time;
-// Register<bit<48>,bit<2>>(1024,0)  egress_time;
 
 
 /*************************************************************************
@@ -267,10 +261,6 @@ control SwitchIngress(
         inout ingress_intrinsic_metadata_for_tm_t ig_tm_md
                       ) {
                     
-                       
-
-            
-
     action change_hdr_to_meta() {
 
 	    meta.metadata_spi = hdr.nsh.spi;
