@@ -1,10 +1,6 @@
 #include <core.p4>
 #include <tna.p4>
 
-// Case 1 
-// A-B-C-D->E
-// LB - FW - NAT - L3 - LB
-
 const bit<16> TYPE_NSH = 0x894f;
 const bit<16> TYPE_IPV4 = 0x800;
 const bit<16> TYPE_ETHER = 0x6558;
@@ -172,13 +168,8 @@ struct metadata_t {
     l2_metadata_t l2_metadata;
     l3_metadata_t l3_metadata;
     ipv4_metadata_t ipv4_metadata;
-    // SF1
     pkt_id_t   pkt_id;
-
-    // SF2
     nat_metadata_t  nat_metadata;
-
-    // SF3
     bit<16> ecmp_select;
     bit<48> ingress_timestamp;
 }
@@ -304,15 +295,11 @@ control SwitchIngress(
     }
 
     action set_dst_nat_nexthop_index(bit<14> nat_rewrite_index) { // nexthop_index, nexthop_type,
-    // modify_field(meta.nat_metadata.nat_nexthop, nexthop_index);
-    // modify_field(meta.nat_metadata.nat_nexthop_type, nexthop_type);
         meta.nat_metadata.nat_rewrite_index = nat_rewrite_index;
         meta.nat_metadata.nat_hit = 1;
     }
 
     action set_twice_nat_nexthop_index(bit<14> nat_rewrite_index) { // nexthop_index, nexthop_type,
-    // modify_field(meta.nat_metadata.nat_nexthop, nexthop_index);
-    // modify_field(meta.nat_metadata.nat_nexthop_type, nexthop_type);
         meta.nat_metadata.nat_rewrite_index = nat_rewrite_index;
         meta.nat_metadata.nat_hit = 1;  
     }
@@ -334,7 +321,6 @@ control SwitchIngress(
         hdr.ipv4.dstAddr = dst_ip;
         nat_update_l4_checksum();
         ig_tm_md.ucast_egress_port = port; 
-        //ig_tm_md.bypass_egress     = true;
         meta.metadata_si = meta.metadata_si - 1;
     }
 
@@ -410,13 +396,11 @@ control SwitchIngress(
 
     action rewrite_mac(bit<48> smac) {
         hdr.out_ethernet.srcAddr = smac;
-        // meta.metadata_si = meta.metadata_si - 1;
     }
 
 //SF3_ipv4 actions
     action send(PortId_t port) {
         ig_tm_md.ucast_egress_port = port;
-        //ig_tm_md.bypass_egress     = true;
         meta.metadata_si = meta.metadata_si - 1;
     }
 
@@ -430,14 +414,12 @@ control SwitchIngress(
     }
     
     action sff_forward() {
-
         hdr.nsh.spi = meta.metadata_spi;
         hdr.nsh.si = meta.metadata_si;
         hdr.ipv4.srcAddr = meta.ipv4_metadata.lkp_ipv4_sa;
         hdr.ipv4.dstAddr = meta.ipv4_metadata.lkp_ipv4_da;
         hdr.out_ethernet.srcAddr = meta.l2_metadata.srcAddr;
         hdr.out_ethernet.dstAddr = meta.l2_metadata.dstAddr;
-        
         hdr.in_ethernet.srcAddr = ig_prsr_md.global_tstamp;
     }
 
@@ -450,11 +432,6 @@ control SwitchIngress(
         hdr.out_ethernet.srcAddr = meta.l2_metadata.srcAddr;
         hdr.out_ethernet.dstAddr = meta.l2_metadata.dstAddr;
     }
-/****************** Ingress Tables*******************/
-/****************** Ingress Tables*******************/
-/****************** Ingress Tables*******************/
-/****************** Ingress Tables*******************/
-/****************** Ingress Tables*******************/
 /****************** Ingress Tables*******************/
 
 
@@ -476,12 +453,10 @@ control SwitchIngress(
         }
         
         default_action = NoAction();
-        // size : IP_NAT_TABLE_SIZE;
     }
    
     table nat_dst {
         key = {
-            //l3_metadata.vrf : exact;
             meta.ipv4_metadata.lkp_ipv4_da : exact;
             meta.l3_metadata.lkp_ip_proto : exact;
             meta.l3_metadata.lkp_l4_dport : exact;
@@ -514,7 +489,6 @@ control SwitchIngress(
 
     table nat_flow {
         key = {
-            //l3_metadata.vrf : ternary;
             meta.ipv4_metadata.lkp_ipv4_sa : exact; //ternary;
             meta.ipv4_metadata.lkp_ipv4_da : exact; //ternary;
             meta.l3_metadata.lkp_ip_proto : exact; //ternary;
@@ -696,15 +670,9 @@ control SwitchIngress(
         }
         
         default_action = NoAction();
-        // size : IP_NAT_TABLE_SIZE;
     }
 
-
-//********************** apply *******************//
-//********************** apply *******************//
-//********************** apply *******************//
-//********************** apply *******************//
-//********************** apply *******************//
+// apply
 
     apply{
         meta.nat_metadata.ingress_nat_mode = 1;

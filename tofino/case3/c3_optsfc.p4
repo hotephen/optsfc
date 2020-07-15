@@ -169,13 +169,8 @@ struct metadata_t {
     l2_metadata_t l2_metadata;
     l3_metadata_t l3_metadata;
     ipv4_metadata_t ipv4_metadata;
-    // SF1
     pkt_id_t   pkt_id;
-
-    // SF2
     nat_metadata_t  nat_metadata;
-
-    // SF3
     bit<16> ecmp_select;
     bit<48> ingress_timestamp;
 }
@@ -301,15 +296,11 @@ control SwitchIngress(
     }
 
     action set_dst_nat_nexthop_index(bit<14> nat_rewrite_index) { // nexthop_index, nexthop_type,
-    // modify_field(meta.nat_metadata.nat_nexthop, nexthop_index);
-    // modify_field(meta.nat_metadata.nat_nexthop_type, nexthop_type);
         meta.nat_metadata.nat_rewrite_index = nat_rewrite_index;
         meta.nat_metadata.nat_hit = 1;
     }
 
     action set_twice_nat_nexthop_index(bit<14> nat_rewrite_index) { // nexthop_index, nexthop_type,
-    // modify_field(meta.nat_metadata.nat_nexthop, nexthop_index);
-    // modify_field(meta.nat_metadata.nat_nexthop_type, nexthop_type);
         meta.nat_metadata.nat_rewrite_index = nat_rewrite_index;
         meta.nat_metadata.nat_hit = 1;  
     }
@@ -402,7 +393,6 @@ control SwitchIngress(
         meta.ipv4_metadata.lkp_ipv4_da = nhop_ipv4;
         hdr.ipv4.dstAddr = nhop_ipv4;
         ig_tm_md.ucast_egress_port = port;
-        hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
         meta.metadata_si = meta.metadata_si - 1;
     }
 
@@ -414,7 +404,6 @@ control SwitchIngress(
 //SF3_ipv4 actions
     action send(PortId_t port) {
         ig_tm_md.ucast_egress_port = port;
-        //ig_tm_md.bypass_egress     = true;
         meta.metadata_si = meta.metadata_si - 1;
     }
 
@@ -428,7 +417,6 @@ control SwitchIngress(
     }
     
     action sff_forward() {
-
         hdr.nsh.spi = meta.metadata_spi;
         hdr.nsh.si = meta.metadata_si;
         hdr.ipv4.srcAddr = meta.ipv4_metadata.lkp_ipv4_sa;
@@ -448,11 +436,6 @@ control SwitchIngress(
     } 
 
 
-/****************** Ingress Tables*******************/
-/****************** Ingress Tables*******************/
-/****************** Ingress Tables*******************/
-/****************** Ingress Tables*******************/
-/****************** Ingress Tables*******************/
 /****************** Ingress Tables*******************/
 
 
@@ -474,12 +457,10 @@ control SwitchIngress(
         }
         
         default_action = NoAction();
-        // size : IP_NAT_TABLE_SIZE;
     }
    
     table nat_dst {
         key = {
-            //l3_metadata.vrf : exact;
             meta.ipv4_metadata.lkp_ipv4_da : exact;
             meta.l3_metadata.lkp_ip_proto : exact;
             meta.l3_metadata.lkp_l4_dport : exact;
@@ -512,7 +493,6 @@ control SwitchIngress(
 
     table nat_flow {
         key = {
-            //l3_metadata.vrf : ternary;
             meta.ipv4_metadata.lkp_ipv4_sa : exact; //ternary;
             meta.ipv4_metadata.lkp_ipv4_da : exact; //ternary;
             meta.l3_metadata.lkp_ip_proto : exact; //ternary;
