@@ -178,7 +178,7 @@ struct metadata_t {
 *********************** P A R S E R  ***********************************
 *************************************************************************/
 
-parser Parser(
+parser SwitchParser(
                 packet_in packet,
                 out headers hdr,
 	            inout metadata_t meta,
@@ -232,14 +232,22 @@ parser Parser(
     }
 }
 
+control MyVerifyChecksum(inout headers hdr, inout metadata_t meta
+) {
+    apply {  }
+}
 
+control MyComputeChecksum(inout headers  hdr, inout metadata_t meta) {
+     apply {
 
+    }
+}
 
 /*************************************************************************
 **************  I N G R E S S   P R O C E S S I N G   *******************
 *************************************************************************/
 
-control Ingress(
+control SwitchIngress(
         inout headers hdr,
         inout metadata_t meta,
         inout standard_metadata_t standard_metadata
@@ -389,7 +397,7 @@ control Ingress(
     }
 
     action drop() {
-        ig_dprsr_md.drop_ctl = 1;
+        mark_to_drop();
     }
 
     action forward(bit<9> port) {
@@ -665,8 +673,8 @@ control Ingress(
     }
 }
 
-control Egress(inout headers hdr,
-		         inout metadata meta,
+control SwitchEgress(inout headers hdr,
+		         inout metadata_t meta,
                  inout standard_metadata_t standard_metadata) {
 
     apply {
@@ -675,7 +683,7 @@ control Egress(inout headers hdr,
 }
 
 
-control Deparser(packet_out packet, in headers hdr) {
+control SwitchDeparser(packet_out packet, in headers hdr) {
     apply {
         packet.emit(hdr.out_ethernet);
 	    packet.emit(hdr.nsh);
@@ -699,8 +707,10 @@ control Deparser(packet_out packet, in headers hdr) {
 *************************************************************************/
 
 V1Switch(
-    Parser(),
-    Ingress(),
-    Egress(),
-    Deparser()
+    SwitchParser(),
+    MyVerifyChecksum(),
+    SwitchIngress(),
+    SwitchEgress(),
+    MyComputeChecksum(),
+    SwitchDeparser()
 ) main;

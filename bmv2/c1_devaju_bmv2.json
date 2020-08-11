@@ -1,0 +1,3796 @@
+{
+  "header_types" : [
+    {
+      "name" : "scalars_0",
+      "id" : 0,
+      "fields" : [
+        ["metadata_t._metadata_spi0", 24, false],
+        ["metadata_t._metadata_si1", 8, false],
+        ["metadata_t._resubmit2", 1, false],
+        ["metadata_t._l2_metadata_dstAddr3", 48, false],
+        ["metadata_t._l2_metadata_srcAddr4", 48, false],
+        ["metadata_t._l2_metadata_etherType5", 16, false],
+        ["metadata_t._l3_metadata_lkp_ip_type6", 2, false],
+        ["metadata_t._l3_metadata_lkp_ip_version7", 4, false],
+        ["metadata_t._l3_metadata_lkp_ip_proto8", 8, false],
+        ["metadata_t._l3_metadata_lkp_dscp9", 8, false],
+        ["metadata_t._l3_metadata_lkp_ip_ttl10", 8, false],
+        ["metadata_t._l3_metadata_lkp_l4_sport11", 16, false],
+        ["metadata_t._l3_metadata_lkp_l4_dport12", 16, false],
+        ["metadata_t._l3_metadata_lkp_outer_l4_sport13", 16, false],
+        ["metadata_t._l3_metadata_lkp_outer_l4_dport14", 16, false],
+        ["metadata_t._l3_metadata_rmac_group15", 10, false],
+        ["metadata_t._l3_metadata_rmac_hit16", 1, false],
+        ["metadata_t._l3_metadata_urpf_mode17", 2, false],
+        ["metadata_t._l3_metadata_urpf_hit18", 1, false],
+        ["metadata_t._l3_metadata_urpf_check_fail19", 1, false],
+        ["metadata_t._l3_metadata_fib_hit20", 1, false],
+        ["metadata_t._l3_metadata_fib_nexthop21", 16, false],
+        ["metadata_t._l3_metadata_fib_nexthop_type22", 2, false],
+        ["metadata_t._l3_metadata_nexthop_index23", 16, false],
+        ["metadata_t._l3_metadata_routed24", 1, false],
+        ["metadata_t._l3_metadata_outer_routed25", 1, false],
+        ["metadata_t._l3_metadata_mtu_index26", 8, false],
+        ["metadata_t._l3_metadata_l3_copy27", 1, false],
+        ["metadata_t._l3_metadata_l3_mtu_check28", 16, false],
+        ["metadata_t._l3_metadata_egress_l4_sport29", 16, false],
+        ["metadata_t._l3_metadata_egress_l4_dport30", 16, false],
+        ["metadata_t._ipv4_metadata_lkp_ipv4_sa31", 32, false],
+        ["metadata_t._ipv4_metadata_lkp_ipv4_da32", 32, false],
+        ["metadata_t._ipv4_metadata_ipv4_unicast_enabled33", 1, false],
+        ["metadata_t._ipv4_metadata_ipv4_urpf_mode34", 2, false],
+        ["metadata_t._pkt_id_id35", 32, false],
+        ["metadata_t._pkt_id_next_id36", 32, false],
+        ["metadata_t._nat_metadata_ingress_nat_mode37", 2, false],
+        ["metadata_t._nat_metadata_egress_nat_mode38", 2, false],
+        ["metadata_t._nat_metadata_nat_nexthop39", 16, false],
+        ["metadata_t._nat_metadata_nat_nexthop_type40", 2, false],
+        ["metadata_t._nat_metadata_nat_hit41", 1, false],
+        ["metadata_t._nat_metadata_nat_rewrite_index42", 14, false],
+        ["metadata_t._nat_metadata_update_checksum43", 1, false],
+        ["metadata_t._nat_metadata_update_inner_checksum44", 1, false],
+        ["metadata_t._nat_metadata_l4_len45", 16, false],
+        ["metadata_t._ecmp_select46", 16, false],
+        ["metadata_t._ingress_timestamp47", 48, false],
+        ["_padding_0", 2, false]
+      ]
+    },
+    {
+      "name" : "standard_metadata",
+      "id" : 1,
+      "fields" : [
+        ["ingress_port", 9, false],
+        ["egress_spec", 9, false],
+        ["egress_port", 9, false],
+        ["clone_spec", 32, false],
+        ["instance_type", 32, false],
+        ["drop", 1, false],
+        ["recirculate_port", 16, false],
+        ["packet_length", 32, false],
+        ["enq_timestamp", 32, false],
+        ["enq_qdepth", 19, false],
+        ["deq_timedelta", 32, false],
+        ["deq_qdepth", 19, false],
+        ["ingress_global_timestamp", 48, false],
+        ["egress_global_timestamp", 48, false],
+        ["lf_field_list", 32, false],
+        ["mcast_grp", 16, false],
+        ["resubmit_flag", 32, false],
+        ["egress_rid", 16, false],
+        ["checksum_error", 1, false],
+        ["recirculate_flag", 32, false],
+        ["parser_error", 32, false],
+        ["_padding", 5, false]
+      ]
+    },
+    {
+      "name" : "resubmit_metadata_t",
+      "id" : 2,
+      "fields" : [
+        ["spi", 24, false],
+        ["si", 8, false],
+        ["dst_ip", 32, false]
+      ]
+    },
+    {
+      "name" : "ethernet_t",
+      "id" : 3,
+      "fields" : [
+        ["dstAddr", 48, false],
+        ["srcAddr", 48, false],
+        ["etherType", 16, false]
+      ]
+    },
+    {
+      "name" : "nsh_t",
+      "id" : 4,
+      "fields" : [
+        ["ver", 2, false],
+        ["oam", 1, false],
+        ["un1", 1, false],
+        ["ttl", 6, false],
+        ["len", 6, false],
+        ["un4", 4, false],
+        ["MDtype", 4, false],
+        ["Nextpro", 16, false],
+        ["spi", 24, false],
+        ["si", 8, false]
+      ]
+    },
+    {
+      "name" : "ipv4_t",
+      "id" : 5,
+      "fields" : [
+        ["version", 4, false],
+        ["ihl", 4, false],
+        ["diffserv", 8, false],
+        ["totalLen", 16, false],
+        ["identification", 16, false],
+        ["flags", 3, false],
+        ["fragOffset", 13, false],
+        ["ttl", 8, false],
+        ["protocol", 8, false],
+        ["hdrChecksum", 16, false],
+        ["srcAddr", 32, false],
+        ["dstAddr", 32, false]
+      ]
+    },
+    {
+      "name" : "tcp_t",
+      "id" : 6,
+      "fields" : [
+        ["srcPort", 16, false],
+        ["dstPort", 16, false],
+        ["seqNo", 32, false],
+        ["ackNo", 32, false],
+        ["dataOffset", 4, false],
+        ["res", 4, false],
+        ["flags", 8, false],
+        ["windows", 16, false],
+        ["checksum", 16, false],
+        ["urgenPtr", 16, false]
+      ]
+    },
+    {
+      "name" : "udp_t",
+      "id" : 7,
+      "fields" : [
+        ["srcPort", 16, false],
+        ["dstPort", 16, false],
+        ["length_", 16, false],
+        ["checksum", 16, false]
+      ]
+    }
+  ],
+  "headers" : [
+    {
+      "name" : "scalars",
+      "id" : 0,
+      "header_type" : "scalars_0",
+      "metadata" : true,
+      "pi_omit" : true
+    },
+    {
+      "name" : "standard_metadata",
+      "id" : 1,
+      "header_type" : "standard_metadata",
+      "metadata" : true,
+      "pi_omit" : true
+    },
+    {
+      "name" : "resubmit_meta",
+      "id" : 2,
+      "header_type" : "resubmit_metadata_t",
+      "metadata" : false,
+      "pi_omit" : true
+    },
+    {
+      "name" : "out_ethernet",
+      "id" : 3,
+      "header_type" : "ethernet_t",
+      "metadata" : false,
+      "pi_omit" : true
+    },
+    {
+      "name" : "nsh",
+      "id" : 4,
+      "header_type" : "nsh_t",
+      "metadata" : false,
+      "pi_omit" : true
+    },
+    {
+      "name" : "in_ethernet",
+      "id" : 5,
+      "header_type" : "ethernet_t",
+      "metadata" : false,
+      "pi_omit" : true
+    },
+    {
+      "name" : "ipv4",
+      "id" : 6,
+      "header_type" : "ipv4_t",
+      "metadata" : false,
+      "pi_omit" : true
+    },
+    {
+      "name" : "tcp",
+      "id" : 7,
+      "header_type" : "tcp_t",
+      "metadata" : false,
+      "pi_omit" : true
+    },
+    {
+      "name" : "udp",
+      "id" : 8,
+      "header_type" : "udp_t",
+      "metadata" : false,
+      "pi_omit" : true
+    }
+  ],
+  "header_stacks" : [],
+  "header_union_types" : [],
+  "header_unions" : [],
+  "header_union_stacks" : [],
+  "field_lists" : [
+    {
+      "id" : 1,
+      "name" : "metadata_t",
+      "source_info" : {
+        "filename" : "c1_devaju_bmv2.p4",
+        "line" : 419,
+        "column" : 20,
+        "source_fragment" : "meta"
+      },
+      "elements" : [
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._metadata_spi0"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._metadata_si1"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._resubmit2"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l2_metadata_dstAddr3"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l2_metadata_srcAddr4"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l2_metadata_etherType5"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_lkp_ip_type6"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_lkp_ip_version7"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_lkp_ip_proto8"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_lkp_dscp9"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_lkp_ip_ttl10"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_lkp_l4_sport11"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_lkp_l4_dport12"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_lkp_outer_l4_sport13"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_lkp_outer_l4_dport14"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_rmac_group15"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_rmac_hit16"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_urpf_mode17"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_urpf_hit18"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_urpf_check_fail19"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_fib_hit20"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_fib_nexthop21"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_fib_nexthop_type22"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_nexthop_index23"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_routed24"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_outer_routed25"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_mtu_index26"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_l3_copy27"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_l3_mtu_check28"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_egress_l4_sport29"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._l3_metadata_egress_l4_dport30"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._ipv4_metadata_lkp_ipv4_sa31"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._ipv4_metadata_lkp_ipv4_da32"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._ipv4_metadata_ipv4_unicast_enabled33"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._ipv4_metadata_ipv4_urpf_mode34"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._pkt_id_id35"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._pkt_id_next_id36"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._nat_metadata_ingress_nat_mode37"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._nat_metadata_egress_nat_mode38"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._nat_metadata_nat_nexthop39"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._nat_metadata_nat_nexthop_type40"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._nat_metadata_nat_hit41"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._nat_metadata_nat_rewrite_index42"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._nat_metadata_update_checksum43"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._nat_metadata_update_inner_checksum44"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._nat_metadata_l4_len45"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._ecmp_select46"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "metadata_t._ingress_timestamp47"]
+        }
+      ]
+    }
+  ],
+  "errors" : [
+    ["NoError", 1],
+    ["PacketTooShort", 2],
+    ["NoMatch", 3],
+    ["StackOutOfBounds", 4],
+    ["HeaderTooShort", 5],
+    ["ParserTimeout", 6]
+  ],
+  "enums" : [],
+  "parsers" : [
+    {
+      "name" : "parser",
+      "id" : 0,
+      "init_state" : "start",
+      "parse_states" : [
+        {
+          "name" : "start",
+          "id" : 0,
+          "parser_ops" : [
+            {
+              "parameters" : [
+                {
+                  "type" : "regular",
+                  "value" : "out_ethernet"
+                }
+              ],
+              "op" : "extract"
+            }
+          ],
+          "transitions" : [
+            {
+              "type" : "hexstr",
+              "value" : "0x894f",
+              "mask" : null,
+              "next_state" : "parse_nsh"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x0800",
+              "mask" : null,
+              "next_state" : "parse_ipv4"
+            },
+            {
+              "value" : "default",
+              "mask" : null,
+              "next_state" : null
+            }
+          ],
+          "transition_key" : [
+            {
+              "type" : "field",
+              "value" : ["out_ethernet", "etherType"]
+            }
+          ]
+        },
+        {
+          "name" : "parse_nsh",
+          "id" : 1,
+          "parser_ops" : [
+            {
+              "parameters" : [
+                {
+                  "type" : "regular",
+                  "value" : "nsh"
+                }
+              ],
+              "op" : "extract"
+            }
+          ],
+          "transitions" : [
+            {
+              "type" : "hexstr",
+              "value" : "0x6558",
+              "mask" : null,
+              "next_state" : "parse_in_ethernet"
+            },
+            {
+              "value" : "default",
+              "mask" : null,
+              "next_state" : null
+            }
+          ],
+          "transition_key" : [
+            {
+              "type" : "field",
+              "value" : ["nsh", "Nextpro"]
+            }
+          ]
+        },
+        {
+          "name" : "parse_in_ethernet",
+          "id" : 2,
+          "parser_ops" : [
+            {
+              "parameters" : [
+                {
+                  "type" : "regular",
+                  "value" : "in_ethernet"
+                }
+              ],
+              "op" : "extract"
+            }
+          ],
+          "transitions" : [
+            {
+              "type" : "hexstr",
+              "value" : "0x0800",
+              "mask" : null,
+              "next_state" : "parse_ipv4"
+            },
+            {
+              "value" : "default",
+              "mask" : null,
+              "next_state" : null
+            }
+          ],
+          "transition_key" : [
+            {
+              "type" : "field",
+              "value" : ["in_ethernet", "etherType"]
+            }
+          ]
+        },
+        {
+          "name" : "parse_ipv4",
+          "id" : 3,
+          "parser_ops" : [
+            {
+              "parameters" : [
+                {
+                  "type" : "regular",
+                  "value" : "ipv4"
+                }
+              ],
+              "op" : "extract"
+            }
+          ],
+          "transitions" : [
+            {
+              "type" : "hexstr",
+              "value" : "0x06",
+              "mask" : null,
+              "next_state" : "parse_tcp"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x11",
+              "mask" : null,
+              "next_state" : "parse_udp"
+            }
+          ],
+          "transition_key" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "protocol"]
+            }
+          ]
+        },
+        {
+          "name" : "parse_tcp",
+          "id" : 4,
+          "parser_ops" : [
+            {
+              "parameters" : [
+                {
+                  "type" : "regular",
+                  "value" : "tcp"
+                }
+              ],
+              "op" : "extract"
+            }
+          ],
+          "transitions" : [
+            {
+              "value" : "default",
+              "mask" : null,
+              "next_state" : null
+            }
+          ],
+          "transition_key" : []
+        },
+        {
+          "name" : "parse_udp",
+          "id" : 5,
+          "parser_ops" : [
+            {
+              "parameters" : [
+                {
+                  "type" : "regular",
+                  "value" : "udp"
+                }
+              ],
+              "op" : "extract"
+            }
+          ],
+          "transitions" : [
+            {
+              "value" : "default",
+              "mask" : null,
+              "next_state" : null
+            }
+          ],
+          "transition_key" : []
+        }
+      ]
+    }
+  ],
+  "parse_vsets" : [],
+  "deparsers" : [
+    {
+      "name" : "deparser",
+      "id" : 0,
+      "source_info" : {
+        "filename" : "c1_devaju_bmv2.p4",
+        "line" : 686,
+        "column" : 8,
+        "source_fragment" : "SwitchDeparser"
+      },
+      "order" : ["out_ethernet", "nsh", "in_ethernet", "ipv4", "tcp", "udp"]
+    }
+  ],
+  "meter_arrays" : [],
+  "counter_arrays" : [],
+  "register_arrays" : [],
+  "calculations" : [
+    {
+      "name" : "calc",
+      "id" : 0,
+      "algo" : "crc16",
+      "input" : [
+        {
+          "type" : "field",
+          "value" : ["ipv4", "srcAddr"]
+        },
+        {
+          "type" : "field",
+          "value" : ["ipv4", "dstAddr"]
+        },
+        {
+          "type" : "field",
+          "value" : ["ipv4", "protocol"]
+        },
+        {
+          "type" : "field",
+          "value" : ["tcp", "srcPort"]
+        },
+        {
+          "type" : "field",
+          "value" : ["tcp", "dstPort"]
+        }
+      ]
+    }
+  ],
+  "learn_lists" : [],
+  "actions" : [
+    {
+      "name" : "NoAction",
+      "id" : 0,
+      "runtime_data" : [],
+      "primitives" : []
+    },
+    {
+      "name" : "NoAction",
+      "id" : 1,
+      "runtime_data" : [],
+      "primitives" : []
+    },
+    {
+      "name" : "NoAction",
+      "id" : 2,
+      "runtime_data" : [],
+      "primitives" : []
+    },
+    {
+      "name" : "NoAction",
+      "id" : 3,
+      "runtime_data" : [],
+      "primitives" : []
+    },
+    {
+      "name" : "NoAction",
+      "id" : 4,
+      "runtime_data" : [],
+      "primitives" : []
+    },
+    {
+      "name" : "NoAction",
+      "id" : 5,
+      "runtime_data" : [],
+      "primitives" : []
+    },
+    {
+      "name" : "NoAction",
+      "id" : 6,
+      "runtime_data" : [],
+      "primitives" : []
+    },
+    {
+      "name" : "NoAction",
+      "id" : 7,
+      "runtime_data" : [],
+      "primitives" : []
+    },
+    {
+      "name" : "SwitchIngress.change_hdr_to_meta",
+      "id" : 8,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._metadata_spi0"]
+            },
+            {
+              "type" : "field",
+              "value" : ["nsh", "spi"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 262,
+            "column" : 5,
+            "source_fragment" : "meta.metadata_spi = hdr.nsh.spi"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._metadata_si1"]
+            },
+            {
+              "type" : "field",
+              "value" : ["nsh", "si"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 263,
+            "column" : 5,
+            "source_fragment" : "meta.metadata_si = hdr.nsh.si"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._l2_metadata_dstAddr3"]
+            },
+            {
+              "type" : "field",
+              "value" : ["out_ethernet", "dstAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 264,
+            "column" : 8,
+            "source_fragment" : "meta.l2_metadata.dstAddr = hdr.out_ethernet.dstAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._l2_metadata_srcAddr4"]
+            },
+            {
+              "type" : "field",
+              "value" : ["out_ethernet", "srcAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 265,
+            "column" : 8,
+            "source_fragment" : "meta.l2_metadata.srcAddr = hdr.out_ethernet.srcAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._l3_metadata_lkp_ip_proto8"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "protocol"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 266,
+            "column" : 8,
+            "source_fragment" : "meta.l3_metadata.lkp_ip_proto = hdr.ipv4.protocol"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._l3_metadata_lkp_l4_sport11"]
+            },
+            {
+              "type" : "field",
+              "value" : ["tcp", "srcPort"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 267,
+            "column" : 8,
+            "source_fragment" : "meta.l3_metadata.lkp_l4_sport = hdr.tcp.srcPort"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._l3_metadata_lkp_l4_dport12"]
+            },
+            {
+              "type" : "field",
+              "value" : ["tcp", "dstPort"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 268,
+            "column" : 8,
+            "source_fragment" : "meta.l3_metadata.lkp_l4_dport = hdr.tcp.dstPort"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._ipv4_metadata_lkp_ipv4_sa31"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 269,
+            "column" : 8,
+            "source_fragment" : "meta.ipv4_metadata.lkp_ipv4_sa = hdr.ipv4.srcAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._ipv4_metadata_lkp_ipv4_da32"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "dstAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 270,
+            "column" : 8,
+            "source_fragment" : "meta.ipv4_metadata.lkp_ipv4_da = hdr.ipv4.dstAddr"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.on_miss",
+      "id" : 9,
+      "runtime_data" : [],
+      "primitives" : []
+    },
+    {
+      "name" : "SwitchIngress.set_dst_nat_nexthop_index",
+      "id" : 10,
+      "runtime_data" : [
+        {
+          "name" : "nat_rewrite_index",
+          "bitwidth" : 14
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._nat_metadata_nat_rewrite_index42"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 284,
+            "column" : 8,
+            "source_fragment" : "meta.nat_metadata.nat_rewrite_index = nat_rewrite_index"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._nat_metadata_nat_hit41"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x01"
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 285,
+            "column" : 8,
+            "source_fragment" : "meta.nat_metadata.nat_hit = 1"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.set_nat_src_rewrite",
+      "id" : 11,
+      "runtime_data" : [
+        {
+          "name" : "src_ip",
+          "bitwidth" : 32
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 300,
+            "column" : 8,
+            "source_fragment" : "hdr.ipv4.srcAddr = src_ip"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._nat_metadata_update_checksum43"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x01"
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 294,
+            "column" : 8,
+            "source_fragment" : "meta.nat_metadata.update_checksum = 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._nat_metadata_l4_len45"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "totalLen"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xffec"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 295,
+            "column" : 8,
+            "source_fragment" : "meta.nat_metadata.l4_len = hdr.ipv4.totalLen -20"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._metadata_si1"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["scalars", "metadata_t._metadata_si1"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 302,
+            "column" : 8,
+            "source_fragment" : "meta.metadata_si = meta.metadata_si - 1"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.set_nat_dst_rewrite",
+      "id" : 12,
+      "runtime_data" : [
+        {
+          "name" : "dst_ip",
+          "bitwidth" : 32
+        },
+        {
+          "name" : "port",
+          "bitwidth" : 9
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "dstAddr"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 307,
+            "column" : 8,
+            "source_fragment" : "hdr.ipv4.dstAddr = dst_ip"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._nat_metadata_update_checksum43"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x01"
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 294,
+            "column" : 8,
+            "source_fragment" : "meta.nat_metadata.update_checksum = 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._nat_metadata_l4_len45"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "totalLen"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xffec"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 295,
+            "column" : 8,
+            "source_fragment" : "meta.nat_metadata.l4_len = hdr.ipv4.totalLen -20"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["standard_metadata", "egress_spec"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 309,
+            "column" : 8,
+            "source_fragment" : "standard_metadata.egress_spec = port"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._metadata_si1"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["scalars", "metadata_t._metadata_si1"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 310,
+            "column" : 8,
+            "source_fragment" : "meta.metadata_si = meta.metadata_si - 1"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.set_nat_src_dst_rewrite",
+      "id" : 13,
+      "runtime_data" : [
+        {
+          "name" : "src_ip",
+          "bitwidth" : 32
+        },
+        {
+          "name" : "dst_ip",
+          "bitwidth" : 32
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 314,
+            "column" : 8,
+            "source_fragment" : "hdr.ipv4.srcAddr = src_ip"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "dstAddr"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 315,
+            "column" : 8,
+            "source_fragment" : "hdr.ipv4.dstAddr = dst_ip"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._nat_metadata_update_checksum43"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x01"
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 294,
+            "column" : 8,
+            "source_fragment" : "meta.nat_metadata.update_checksum = 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._nat_metadata_l4_len45"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "totalLen"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xffec"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 295,
+            "column" : 8,
+            "source_fragment" : "meta.nat_metadata.l4_len = hdr.ipv4.totalLen -20"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._metadata_si1"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["scalars", "metadata_t._metadata_si1"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 317,
+            "column" : 8,
+            "source_fragment" : "meta.metadata_si = meta.metadata_si - 1"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.set_nat_src_udp_rewrite",
+      "id" : 14,
+      "runtime_data" : [
+        {
+          "name" : "src_ip",
+          "bitwidth" : 32
+        },
+        {
+          "name" : "src_port",
+          "bitwidth" : 16
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 321,
+            "column" : 8,
+            "source_fragment" : "hdr.ipv4.srcAddr = src_ip"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["udp", "srcPort"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 322,
+            "column" : 8,
+            "source_fragment" : "hdr.udp.srcPort = src_port"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._nat_metadata_update_checksum43"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x01"
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 294,
+            "column" : 8,
+            "source_fragment" : "meta.nat_metadata.update_checksum = 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._nat_metadata_l4_len45"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "totalLen"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xffec"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 295,
+            "column" : 8,
+            "source_fragment" : "meta.nat_metadata.l4_len = hdr.ipv4.totalLen -20"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._metadata_si1"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["scalars", "metadata_t._metadata_si1"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 324,
+            "column" : 8,
+            "source_fragment" : "meta.metadata_si = meta.metadata_si - 1"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.set_nat_dst_udp_rewrite",
+      "id" : 15,
+      "runtime_data" : [
+        {
+          "name" : "dst_ip",
+          "bitwidth" : 32
+        },
+        {
+          "name" : "dst_port",
+          "bitwidth" : 16
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "dstAddr"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 328,
+            "column" : 8,
+            "source_fragment" : "hdr.ipv4.dstAddr = dst_ip"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["udp", "dstPort"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 329,
+            "column" : 8,
+            "source_fragment" : "hdr.udp.dstPort = dst_port"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._nat_metadata_update_checksum43"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x01"
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 294,
+            "column" : 8,
+            "source_fragment" : "meta.nat_metadata.update_checksum = 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._nat_metadata_l4_len45"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "totalLen"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xffec"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 295,
+            "column" : 8,
+            "source_fragment" : "meta.nat_metadata.l4_len = hdr.ipv4.totalLen -20"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._metadata_si1"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["scalars", "metadata_t._metadata_si1"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 331,
+            "column" : 8,
+            "source_fragment" : "meta.metadata_si = meta.metadata_si - 1"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.set_nat_src_dst_udp_rewrite",
+      "id" : 16,
+      "runtime_data" : [
+        {
+          "name" : "src_ip",
+          "bitwidth" : 32
+        },
+        {
+          "name" : "dst_ip",
+          "bitwidth" : 32
+        },
+        {
+          "name" : "src_port",
+          "bitwidth" : 16
+        },
+        {
+          "name" : "dst_port",
+          "bitwidth" : 16
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 335,
+            "column" : 8,
+            "source_fragment" : "hdr.ipv4.srcAddr = src_ip"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "dstAddr"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 336,
+            "column" : 8,
+            "source_fragment" : "hdr.ipv4.dstAddr = dst_ip"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["udp", "srcPort"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 2
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 337,
+            "column" : 8,
+            "source_fragment" : "hdr.udp.srcPort = src_port"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["udp", "dstPort"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 3
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 338,
+            "column" : 8,
+            "source_fragment" : "hdr.udp.dstPort = dst_port"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._nat_metadata_update_checksum43"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x01"
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 294,
+            "column" : 8,
+            "source_fragment" : "meta.nat_metadata.update_checksum = 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._nat_metadata_l4_len45"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "totalLen"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xffec"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 295,
+            "column" : 8,
+            "source_fragment" : "meta.nat_metadata.l4_len = hdr.ipv4.totalLen -20"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._metadata_si1"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["scalars", "metadata_t._metadata_si1"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 340,
+            "column" : 8,
+            "source_fragment" : "meta.metadata_si = meta.metadata_si - 1"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.set_nat_src_tcp_rewrite",
+      "id" : 17,
+      "runtime_data" : [
+        {
+          "name" : "src_ip",
+          "bitwidth" : 32
+        },
+        {
+          "name" : "src_port",
+          "bitwidth" : 16
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 344,
+            "column" : 8,
+            "source_fragment" : "hdr.ipv4.srcAddr = src_ip"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["tcp", "srcPort"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 345,
+            "column" : 8,
+            "source_fragment" : "hdr.tcp.srcPort = src_port"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._nat_metadata_update_checksum43"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x01"
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 294,
+            "column" : 8,
+            "source_fragment" : "meta.nat_metadata.update_checksum = 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._nat_metadata_l4_len45"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "totalLen"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xffec"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 295,
+            "column" : 8,
+            "source_fragment" : "meta.nat_metadata.l4_len = hdr.ipv4.totalLen -20"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._metadata_si1"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["scalars", "metadata_t._metadata_si1"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 347,
+            "column" : 8,
+            "source_fragment" : "meta.metadata_si = meta.metadata_si - 1"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.set_nat_dst_tcp_rewrite",
+      "id" : 18,
+      "runtime_data" : [
+        {
+          "name" : "dst_ip",
+          "bitwidth" : 32
+        },
+        {
+          "name" : "dst_port",
+          "bitwidth" : 16
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "dstAddr"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 351,
+            "column" : 8,
+            "source_fragment" : "hdr.ipv4.dstAddr = dst_ip"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["tcp", "dstPort"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 352,
+            "column" : 8,
+            "source_fragment" : "hdr.tcp.dstPort = dst_port"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._nat_metadata_update_checksum43"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x01"
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 294,
+            "column" : 8,
+            "source_fragment" : "meta.nat_metadata.update_checksum = 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._nat_metadata_l4_len45"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "totalLen"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xffec"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 295,
+            "column" : 8,
+            "source_fragment" : "meta.nat_metadata.l4_len = hdr.ipv4.totalLen -20"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._metadata_si1"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["scalars", "metadata_t._metadata_si1"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 354,
+            "column" : 8,
+            "source_fragment" : "meta.metadata_si = meta.metadata_si - 1"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.set_nat_src_dst_tcp_rewrite",
+      "id" : 19,
+      "runtime_data" : [
+        {
+          "name" : "src_ip",
+          "bitwidth" : 32
+        },
+        {
+          "name" : "dst_ip",
+          "bitwidth" : 32
+        },
+        {
+          "name" : "src_port",
+          "bitwidth" : 16
+        },
+        {
+          "name" : "dst_port",
+          "bitwidth" : 16
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 358,
+            "column" : 8,
+            "source_fragment" : "hdr.ipv4.srcAddr = src_ip"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "dstAddr"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 359,
+            "column" : 8,
+            "source_fragment" : "hdr.ipv4.dstAddr = dst_ip"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["tcp", "srcPort"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 2
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 360,
+            "column" : 8,
+            "source_fragment" : "hdr.tcp.srcPort = src_port"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["tcp", "dstPort"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 3
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 361,
+            "column" : 8,
+            "source_fragment" : "hdr.tcp.dstPort = dst_port"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._nat_metadata_update_checksum43"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x01"
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 294,
+            "column" : 8,
+            "source_fragment" : "meta.nat_metadata.update_checksum = 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._nat_metadata_l4_len45"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "totalLen"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xffec"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 295,
+            "column" : 8,
+            "source_fragment" : "meta.nat_metadata.l4_len = hdr.ipv4.totalLen -20"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._metadata_si1"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["scalars", "metadata_t._metadata_si1"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 363,
+            "column" : 8,
+            "source_fragment" : "meta.metadata_si = meta.metadata_si - 1"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.set_ecmp_select",
+      "id" : 20,
+      "runtime_data" : [
+        {
+          "name" : "ecmp_base",
+          "bitwidth" : 16
+        },
+        {
+          "name" : "ecmp_count",
+          "bitwidth" : 16
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "modify_field_with_hash_based_offset",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._ecmp_select46"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            },
+            {
+              "type" : "calculation",
+              "value" : "calc"
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 369,
+            "column" : 8,
+            "source_fragment" : "hash(meta.ecmp_select, ..."
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.set_nhop",
+      "id" : 21,
+      "runtime_data" : [
+        {
+          "name" : "nhop_dmac",
+          "bitwidth" : 48
+        },
+        {
+          "name" : "nhop_ipv4",
+          "bitwidth" : 32
+        },
+        {
+          "name" : "port",
+          "bitwidth" : 9
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["out_ethernet", "dstAddr"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 381,
+            "column" : 8,
+            "source_fragment" : "hdr.out_ethernet.dstAddr = nhop_dmac"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._ipv4_metadata_lkp_ipv4_da32"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 382,
+            "column" : 8,
+            "source_fragment" : "meta.ipv4_metadata.lkp_ipv4_da = nhop_ipv4"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "dstAddr"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 1
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 383,
+            "column" : 8,
+            "source_fragment" : "hdr.ipv4.dstAddr = nhop_ipv4"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["standard_metadata", "egress_spec"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 2
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 384,
+            "column" : 8,
+            "source_fragment" : "standard_metadata.egress_spec = port"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "ttl"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "ttl"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 385,
+            "column" : 8,
+            "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.rewrite_mac",
+      "id" : 22,
+      "runtime_data" : [
+        {
+          "name" : "smac",
+          "bitwidth" : 48
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["out_ethernet", "srcAddr"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 389,
+            "column" : 8,
+            "source_fragment" : "hdr.out_ethernet.srcAddr = smac"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._metadata_si1"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["scalars", "metadata_t._metadata_si1"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 390,
+            "column" : 8,
+            "source_fragment" : "meta.metadata_si = meta.metadata_si - 1"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.send",
+      "id" : 23,
+      "runtime_data" : [
+        {
+          "name" : "port",
+          "bitwidth" : 9
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["standard_metadata", "egress_spec"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 395,
+            "column" : 8,
+            "source_fragment" : "standard_metadata.egress_spec = port"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._metadata_si1"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["scalars", "metadata_t._metadata_si1"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 396,
+            "column" : 8,
+            "source_fragment" : "meta.metadata_si = meta.metadata_si - 1"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.drop",
+      "id" : 24,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "drop",
+          "parameters" : [],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 400,
+            "column" : 8,
+            "source_fragment" : "mark_to_drop()"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.drop",
+      "id" : 25,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "drop",
+          "parameters" : [],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 400,
+            "column" : 8,
+            "source_fragment" : "mark_to_drop()"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.drop",
+      "id" : 26,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "drop",
+          "parameters" : [],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 400,
+            "column" : 8,
+            "source_fragment" : "mark_to_drop()"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.drop",
+      "id" : 27,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "drop",
+          "parameters" : [],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 400,
+            "column" : 8,
+            "source_fragment" : "mark_to_drop()"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.drop",
+      "id" : 28,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "drop",
+          "parameters" : [],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 400,
+            "column" : 8,
+            "source_fragment" : "mark_to_drop()"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.drop",
+      "id" : 29,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "drop",
+          "parameters" : [],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 400,
+            "column" : 8,
+            "source_fragment" : "mark_to_drop()"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.forward",
+      "id" : 30,
+      "runtime_data" : [
+        {
+          "name" : "port",
+          "bitwidth" : 9
+        }
+      ],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._metadata_si1"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["scalars", "metadata_t._metadata_si1"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 404,
+            "column" : 8,
+            "source_fragment" : "meta.metadata_si = meta.metadata_si - 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["standard_metadata", "egress_spec"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 405,
+            "column" : 8,
+            "source_fragment" : "standard_metadata.egress_spec = port"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.sff_forward",
+      "id" : 31,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["nsh", "spi"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._metadata_spi0"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 410,
+            "column" : 8,
+            "source_fragment" : "hdr.nsh.spi = meta"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["nsh", "si"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._metadata_si1"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 411,
+            "column" : 8,
+            "source_fragment" : "hdr.nsh.si = meta"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._ipv4_metadata_lkp_ipv4_sa31"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 412,
+            "column" : 8,
+            "source_fragment" : "hdr.ipv4.srcAddr = meta"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "dstAddr"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._ipv4_metadata_lkp_ipv4_da32"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 413,
+            "column" : 8,
+            "source_fragment" : "hdr.ipv4.dstAddr = meta"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["out_ethernet", "srcAddr"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._l2_metadata_srcAddr4"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 414,
+            "column" : 8,
+            "source_fragment" : "hdr.out_ethernet.srcAddr = meta"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["out_ethernet", "dstAddr"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._l2_metadata_dstAddr3"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 415,
+            "column" : 8,
+            "source_fragment" : "hdr.out_ethernet.dstAddr = meta"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "SwitchIngress.loopback",
+      "id" : 32,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "recirculate",
+          "parameters" : [
+            {
+              "type" : "hexstr",
+              "value" : "0x1"
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 419,
+            "column" : 8,
+            "source_fragment" : "recirculate(meta)"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["nsh", "spi"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._metadata_spi0"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 420,
+            "column" : 8,
+            "source_fragment" : "hdr.nsh.spi = meta"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["nsh", "si"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._metadata_si1"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 421,
+            "column" : 8,
+            "source_fragment" : "hdr.nsh.si = meta"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._ipv4_metadata_lkp_ipv4_sa31"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 422,
+            "column" : 8,
+            "source_fragment" : "hdr.ipv4.srcAddr = meta"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "dstAddr"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._ipv4_metadata_lkp_ipv4_da32"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 423,
+            "column" : 8,
+            "source_fragment" : "hdr.ipv4.dstAddr = meta"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["out_ethernet", "srcAddr"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._l2_metadata_srcAddr4"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 424,
+            "column" : 8,
+            "source_fragment" : "hdr.out_ethernet.srcAddr = meta"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["out_ethernet", "dstAddr"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._l2_metadata_dstAddr3"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 425,
+            "column" : 8,
+            "source_fragment" : "hdr.out_ethernet.dstAddr = meta"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "act",
+      "id" : 33,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "metadata_t._nat_metadata_ingress_nat_mode37"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x01"
+            }
+          ],
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 643,
+            "column" : 8,
+            "source_fragment" : "meta.nat_metadata.ingress_nat_mode = 1"
+          }
+        }
+      ]
+    }
+  ],
+  "pipelines" : [
+    {
+      "name" : "ingress",
+      "id" : 0,
+      "source_info" : {
+        "filename" : "c1_devaju_bmv2.p4",
+        "line" : 250,
+        "column" : 8,
+        "source_fragment" : "SwitchIngress"
+      },
+      "init_table" : "tbl_act",
+      "tables" : [
+        {
+          "name" : "tbl_act",
+          "id" : 0,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [33],
+          "actions" : ["act"],
+          "base_default_next" : "tbl_change_hdr_to_meta",
+          "next_tables" : {
+            "act" : "tbl_change_hdr_to_meta"
+          },
+          "default_entry" : {
+            "action_id" : 33,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_change_hdr_to_meta",
+          "id" : 1,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [8],
+          "actions" : ["SwitchIngress.change_hdr_to_meta"],
+          "base_default_next" : "SwitchIngress.fw",
+          "next_tables" : {
+            "SwitchIngress.change_hdr_to_meta" : "SwitchIngress.fw"
+          },
+          "default_entry" : {
+            "action_id" : 8,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "SwitchIngress.fw",
+          "id" : 2,
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 574,
+            "column" : 10,
+            "source_fragment" : "fw"
+          },
+          "key" : [
+            {
+              "match_type" : "exact",
+              "name" : "meta.l2_metadata.srcAddr",
+              "target" : ["scalars", "metadata_t._l2_metadata_srcAddr4"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.ipv4_metadata.lkp_ipv4_sa",
+              "target" : ["scalars", "metadata_t._ipv4_metadata_lkp_ipv4_sa31"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.metadata_spi",
+              "target" : ["scalars", "metadata_t._metadata_spi0"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.metadata_si",
+              "target" : ["scalars", "metadata_t._metadata_si1"],
+              "mask" : null
+            }
+          ],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [6, 30, 28],
+          "actions" : ["NoAction", "SwitchIngress.forward", "SwitchIngress.drop"],
+          "base_default_next" : "SwitchIngress.nat_dst",
+          "next_tables" : {
+            "NoAction" : "SwitchIngress.nat_dst",
+            "SwitchIngress.forward" : "SwitchIngress.nat_dst",
+            "SwitchIngress.drop" : "SwitchIngress.nat_dst"
+          },
+          "default_entry" : {
+            "action_id" : 6,
+            "action_const" : false,
+            "action_data" : [],
+            "action_entry_const" : false
+          }
+        },
+        {
+          "name" : "SwitchIngress.nat_dst",
+          "id" : 3,
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 450,
+            "column" : 10,
+            "source_fragment" : "nat_dst"
+          },
+          "key" : [
+            {
+              "match_type" : "exact",
+              "name" : "meta.ipv4_metadata.lkp_ipv4_da",
+              "target" : ["scalars", "metadata_t._ipv4_metadata_lkp_ipv4_da32"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.l3_metadata.lkp_ip_proto",
+              "target" : ["scalars", "metadata_t._l3_metadata_lkp_ip_proto8"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.l3_metadata.lkp_l4_dport",
+              "target" : ["scalars", "metadata_t._l3_metadata_lkp_l4_dport12"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.metadata_spi",
+              "target" : ["scalars", "metadata_t._metadata_spi0"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.metadata_si",
+              "target" : ["scalars", "metadata_t._metadata_si1"],
+              "mask" : null
+            }
+          ],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [9, 10, 0],
+          "actions" : ["SwitchIngress.on_miss", "SwitchIngress.set_dst_nat_nexthop_index", "NoAction"],
+          "base_default_next" : "SwitchIngress.egress_nat",
+          "next_tables" : {
+            "SwitchIngress.on_miss" : "SwitchIngress.egress_nat",
+            "SwitchIngress.set_dst_nat_nexthop_index" : "SwitchIngress.egress_nat",
+            "NoAction" : "SwitchIngress.egress_nat"
+          },
+          "default_entry" : {
+            "action_id" : 0,
+            "action_const" : false,
+            "action_data" : [],
+            "action_entry_const" : false
+          }
+        },
+        {
+          "name" : "SwitchIngress.egress_nat",
+          "id" : 4,
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 502,
+            "column" : 10,
+            "source_fragment" : "egress_nat"
+          },
+          "key" : [
+            {
+              "match_type" : "exact",
+              "name" : "meta.nat_metadata.nat_rewrite_index",
+              "target" : ["scalars", "metadata_t._nat_metadata_nat_rewrite_index42"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.metadata_spi",
+              "target" : ["scalars", "metadata_t._metadata_spi0"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.metadata_si",
+              "target" : ["scalars", "metadata_t._metadata_si1"],
+              "mask" : null
+            }
+          ],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [1, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+          "actions" : ["NoAction", "SwitchIngress.set_nat_src_rewrite", "SwitchIngress.set_nat_dst_rewrite", "SwitchIngress.set_nat_src_dst_rewrite", "SwitchIngress.set_nat_src_udp_rewrite", "SwitchIngress.set_nat_dst_udp_rewrite", "SwitchIngress.set_nat_src_dst_udp_rewrite", "SwitchIngress.set_nat_src_tcp_rewrite", "SwitchIngress.set_nat_dst_tcp_rewrite", "SwitchIngress.set_nat_src_dst_tcp_rewrite"],
+          "base_default_next" : "SwitchIngress.l3",
+          "next_tables" : {
+            "NoAction" : "SwitchIngress.l3",
+            "SwitchIngress.set_nat_src_rewrite" : "SwitchIngress.l3",
+            "SwitchIngress.set_nat_dst_rewrite" : "SwitchIngress.l3",
+            "SwitchIngress.set_nat_src_dst_rewrite" : "SwitchIngress.l3",
+            "SwitchIngress.set_nat_src_udp_rewrite" : "SwitchIngress.l3",
+            "SwitchIngress.set_nat_dst_udp_rewrite" : "SwitchIngress.l3",
+            "SwitchIngress.set_nat_src_dst_udp_rewrite" : "SwitchIngress.l3",
+            "SwitchIngress.set_nat_src_tcp_rewrite" : "SwitchIngress.l3",
+            "SwitchIngress.set_nat_dst_tcp_rewrite" : "SwitchIngress.l3",
+            "SwitchIngress.set_nat_src_dst_tcp_rewrite" : "SwitchIngress.l3"
+          },
+          "default_entry" : {
+            "action_id" : 1,
+            "action_const" : false,
+            "action_data" : [],
+            "action_entry_const" : false
+          }
+        },
+        {
+          "name" : "SwitchIngress.l3",
+          "id" : 5,
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 560,
+            "column" : 10,
+            "source_fragment" : "l3"
+          },
+          "key" : [
+            {
+              "match_type" : "exact",
+              "name" : "meta.ipv4_metadata.lkp_ipv4_da",
+              "target" : ["scalars", "metadata_t._ipv4_metadata_lkp_ipv4_da32"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.metadata_spi",
+              "target" : ["scalars", "metadata_t._metadata_spi0"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.metadata_si",
+              "target" : ["scalars", "metadata_t._metadata_si1"],
+              "mask" : null
+            }
+          ],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [23, 27, 5],
+          "actions" : ["SwitchIngress.send", "SwitchIngress.drop", "NoAction"],
+          "base_default_next" : "SwitchIngress.ecmp_group",
+          "next_tables" : {
+            "SwitchIngress.send" : "SwitchIngress.ecmp_group",
+            "SwitchIngress.drop" : "SwitchIngress.ecmp_group",
+            "NoAction" : "SwitchIngress.ecmp_group"
+          },
+          "default_entry" : {
+            "action_id" : 5,
+            "action_const" : false,
+            "action_data" : [],
+            "action_entry_const" : false
+          }
+        },
+        {
+          "name" : "SwitchIngress.ecmp_group",
+          "id" : 6,
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 524,
+            "column" : 10,
+            "source_fragment" : "ecmp_group"
+          },
+          "key" : [
+            {
+              "match_type" : "lpm",
+              "name" : "hdr.ipv4.dstAddr",
+              "target" : ["ipv4", "dstAddr"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.metadata_spi",
+              "target" : ["scalars", "metadata_t._metadata_spi0"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.metadata_si",
+              "target" : ["scalars", "metadata_t._metadata_si1"],
+              "mask" : null
+            }
+          ],
+          "match_type" : "lpm",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [24, 20, 2],
+          "actions" : ["SwitchIngress.drop", "SwitchIngress.set_ecmp_select", "NoAction"],
+          "base_default_next" : "SwitchIngress.ecmp_nhop",
+          "next_tables" : {
+            "SwitchIngress.drop" : "SwitchIngress.ecmp_nhop",
+            "SwitchIngress.set_ecmp_select" : "SwitchIngress.ecmp_nhop",
+            "NoAction" : "SwitchIngress.ecmp_nhop"
+          },
+          "default_entry" : {
+            "action_id" : 2,
+            "action_const" : false,
+            "action_data" : [],
+            "action_entry_const" : false
+          }
+        },
+        {
+          "name" : "SwitchIngress.ecmp_nhop",
+          "id" : 7,
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 536,
+            "column" : 10,
+            "source_fragment" : "ecmp_nhop"
+          },
+          "key" : [
+            {
+              "match_type" : "ternary",
+              "name" : "meta.ecmp_select",
+              "target" : ["scalars", "metadata_t._ecmp_select46"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.metadata_spi",
+              "target" : ["scalars", "metadata_t._metadata_spi0"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.metadata_si",
+              "target" : ["scalars", "metadata_t._metadata_si1"],
+              "mask" : null
+            }
+          ],
+          "match_type" : "ternary",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [25, 21, 3],
+          "actions" : ["SwitchIngress.drop", "SwitchIngress.set_nhop", "NoAction"],
+          "base_default_next" : "SwitchIngress.send_frame",
+          "next_tables" : {
+            "SwitchIngress.drop" : "SwitchIngress.send_frame",
+            "SwitchIngress.set_nhop" : "SwitchIngress.send_frame",
+            "NoAction" : "SwitchIngress.send_frame"
+          },
+          "default_entry" : {
+            "action_id" : 3,
+            "action_const" : false,
+            "action_data" : [],
+            "action_entry_const" : false
+          }
+        },
+        {
+          "name" : "SwitchIngress.send_frame",
+          "id" : 8,
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 547,
+            "column" : 10,
+            "source_fragment" : "send_frame"
+          },
+          "key" : [
+            {
+              "match_type" : "exact",
+              "name" : "standard_metadata.egress_spec",
+              "target" : ["standard_metadata", "egress_spec"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.metadata_spi",
+              "target" : ["scalars", "metadata_t._metadata_spi0"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.metadata_si",
+              "target" : ["scalars", "metadata_t._metadata_si1"],
+              "mask" : null
+            }
+          ],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [22, 26, 4],
+          "actions" : ["SwitchIngress.rewrite_mac", "SwitchIngress.drop", "NoAction"],
+          "base_default_next" : "SwitchIngress.sff",
+          "next_tables" : {
+            "SwitchIngress.rewrite_mac" : "SwitchIngress.sff",
+            "SwitchIngress.drop" : "SwitchIngress.sff",
+            "NoAction" : "SwitchIngress.sff"
+          },
+          "default_entry" : {
+            "action_id" : 4,
+            "action_const" : false,
+            "action_data" : [],
+            "action_entry_const" : false
+          }
+        },
+        {
+          "name" : "SwitchIngress.sff",
+          "id" : 9,
+          "source_info" : {
+            "filename" : "c1_devaju_bmv2.p4",
+            "line" : 589,
+            "column" : 10,
+            "source_fragment" : "sff"
+          },
+          "key" : [
+            {
+              "match_type" : "exact",
+              "name" : "meta.metadata_spi",
+              "target" : ["scalars", "metadata_t._metadata_spi0"],
+              "mask" : null
+            },
+            {
+              "match_type" : "exact",
+              "name" : "meta.metadata_si",
+              "target" : ["scalars", "metadata_t._metadata_si1"],
+              "mask" : null
+            }
+          ],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [31, 29, 32, 7],
+          "actions" : ["SwitchIngress.sff_forward", "SwitchIngress.drop", "SwitchIngress.loopback", "NoAction"],
+          "base_default_next" : null,
+          "next_tables" : {
+            "SwitchIngress.sff_forward" : null,
+            "SwitchIngress.drop" : null,
+            "SwitchIngress.loopback" : null,
+            "NoAction" : null
+          },
+          "default_entry" : {
+            "action_id" : 31,
+            "action_const" : false,
+            "action_data" : [],
+            "action_entry_const" : false
+          }
+        }
+      ],
+      "action_profiles" : [],
+      "conditionals" : []
+    },
+    {
+      "name" : "egress",
+      "id" : 1,
+      "source_info" : {
+        "filename" : "c1_devaju_bmv2.p4",
+        "line" : 676,
+        "column" : 8,
+        "source_fragment" : "SwitchEgress"
+      },
+      "init_table" : null,
+      "tables" : [],
+      "action_profiles" : [],
+      "conditionals" : []
+    }
+  ],
+  "checksums" : [],
+  "force_arith" : [],
+  "extern_instances" : [],
+  "field_aliases" : [
+    [
+      "queueing_metadata.enq_timestamp",
+      ["standard_metadata", "enq_timestamp"]
+    ],
+    [
+      "queueing_metadata.enq_qdepth",
+      ["standard_metadata", "enq_qdepth"]
+    ],
+    [
+      "queueing_metadata.deq_timedelta",
+      ["standard_metadata", "deq_timedelta"]
+    ],
+    [
+      "queueing_metadata.deq_qdepth",
+      ["standard_metadata", "deq_qdepth"]
+    ],
+    [
+      "intrinsic_metadata.ingress_global_timestamp",
+      ["standard_metadata", "ingress_global_timestamp"]
+    ],
+    [
+      "intrinsic_metadata.egress_global_timestamp",
+      ["standard_metadata", "egress_global_timestamp"]
+    ],
+    [
+      "intrinsic_metadata.lf_field_list",
+      ["standard_metadata", "lf_field_list"]
+    ],
+    [
+      "intrinsic_metadata.mcast_grp",
+      ["standard_metadata", "mcast_grp"]
+    ],
+    [
+      "intrinsic_metadata.resubmit_flag",
+      ["standard_metadata", "resubmit_flag"]
+    ],
+    [
+      "intrinsic_metadata.egress_rid",
+      ["standard_metadata", "egress_rid"]
+    ],
+    [
+      "intrinsic_metadata.recirculate_flag",
+      ["standard_metadata", "recirculate_flag"]
+    ]
+  ],
+  "program" : "./c1_devaju_bmv2.p4i",
+  "__meta__" : {
+    "version" : [2, 18],
+    "compiler" : "https://github.com/p4lang/p4c"
+  }
+}
