@@ -178,7 +178,7 @@ struct metadata_t {
 *********************** P A R S E R  ***********************************
 *************************************************************************/
 
-parser SwitchIngressParser(
+parser Parser(
                 packet_in packet,
                 out headers hdr,
 	            inout metadata_t meta,
@@ -239,7 +239,7 @@ parser SwitchIngressParser(
 **************  I N G R E S S   P R O C E S S I N G   *******************
 *************************************************************************/
 
-control SwitchIngress(
+control Ingress(
         inout headers hdr,
         inout metadata_t meta,
         inout standard_metadata_t standard_metadata
@@ -383,7 +383,7 @@ control SwitchIngress(
     }
 
 //SF3_ipv4 actions
-    action send(PortId_t port) {
+    action send(bit<9> port) {
         standard_metadata.egress_spec = port;
         meta.metadata_si = meta.metadata_si - 1;
     }
@@ -665,56 +665,33 @@ control SwitchIngress(
     }
 }
 
-/*************************************************************************
-***********************  D E P A R S E R  *******************************
-*************************************************************************/
+control Egress(inout headers hdr,
+		         inout metadata meta,
+                 inout standard_metadata_t standard_metadata) {
 
-control SwitchIngressDeparser(
-        packet_out packet,
-        inout headers hdr,
-        in metadata_t meta,
-        in ingress_intrinsic_metadata_for_deparser_t ig_dprsr_md) {
-    
-    
+    apply {
+    }
 
-    apply{
+}
 
-        packet.emit(hdr);
+
+control Deparser(packet_out packet, in headers hdr) {
+    apply {
+        packet.emit(hdr.out_ethernet);
+	    packet.emit(hdr.nsh);
+        packet.emit(hdr.in_ethernet);      
+        packet.emit(hdr.ipv4);
+        packet.emit(hdr.tcp);
+        packet.emit(hdr.udp);
 
     }
-    
 }
 
 /*************************************************************************
 ****************  E G R E S S   P R O C E S S I N G   *******************
 *************************************************************************/
 
-control Egress(
-	inout headers hdr,
-	inout metadata_t meta,
-	in egress_intrinsic_metadata_t eg_intr_md,
-	in egress_intrinsic_metadata_from_parser_t eg_prsr_md,
-	inout egress_intrinsic_metadata_for_deparser_t eg_dprsr_md,
-	inout egress_intrinsic_metadata_for_output_port_t eg_intr_md_for_oport){
 
-
-
-	apply{
-        hdr.in_ethernet.dstAddr = eg_prsr_md.global_tstamp; 
-    }
-
-}
-
-control EgressDeparser(
-	packet_out packet,
-	inout headers hdr,
-	in metadata_t eg_md,
-	in egress_intrinsic_metadata_for_deparser_t eg_dprsr_md) {
-
-	apply{
-        packet.emit(hdr);
-    }
-}
 
 
 /*************************************************************************
