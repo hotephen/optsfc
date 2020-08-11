@@ -181,24 +181,10 @@ struct metadata_t {
 parser SwitchIngressParser(
                 packet_in packet,
                 out headers hdr,
-	            out metadata_t meta,
-                out ingress_intrinsic_metadata_t ig_intr_md) {
+	            inout metadata_t meta,
+                inout standard_metadata_t standard_metadata) {
 
     state start {
-        packet.extract(ig_intr_md);
-        transition select(ig_intr_md.resubmit_flag) {
-            1 : parse_resubmit;
-            0 : parse_port_metadata;
-        }
-    }
-
-    state parse_resubmit {
-        packet.extract<resubmit_metadata_t>(hdr.resubmit_meta);
-        transition parse_out_ethernet;
-    }
-
-    state parse_port_metadata {
-        packet.advance(PORT_METADATA_SIZE);
         transition parse_out_ethernet;
     }
 
@@ -256,10 +242,7 @@ parser SwitchIngressParser(
 control SwitchIngress(
         inout headers hdr,
         inout metadata_t meta,
-        in ingress_intrinsic_metadata_t ig_intr_md,
-        in ingress_intrinsic_metadata_from_parser_t ig_prsr_md,
-        inout ingress_intrinsic_metadata_for_deparser_t ig_dprsr_md,
-        inout ingress_intrinsic_metadata_for_tm_t ig_tm_md
+        inout standard_metadata_t standard_metadata
                       ) {
                     
                        
@@ -315,7 +298,7 @@ control SwitchIngress(
     action set_nat_dst_rewrite(bit<32> dst_ip, bit<9> port) {
         hdr.ipv4.dstAddr = dst_ip;
         nat_update_l4_checksum();
-        ig_tm_md.ucast_egress_port = port; 
+        standard_metadata.egress_spec = port;
         meta.metadata_si = meta.metadata_si - 1;
     }
 
@@ -376,16 +359,22 @@ control SwitchIngress(
     Hash<bit<16>>(HashAlgorithm_t.CRC16) hash;
  
     action set_ecmp_select(bit<16> ecmp_base, bit<16> ecmp_count) {
-	meta.ecmp_select = hash.get({hdr.ipv4.srcAddr, hdr.ipv4.dstAddr,
-                        hdr.ipv4.protocol, hdr.tcp.srcPort, hdr.tcp.dstPort},
-                        ecmp_base, ecmp_count);	
+        hash(meta.ecmp_select,
+	        HashAlgorithm.crc16,
+	        ecmp_base,
+	        { hdr.ipv4.srcAddr,
+            hdr.ipv4.dstAddr,
+            hdr.ipv4.protocol,
+            hdr.tcp.srcPort,
+            hdr.tcp.dstPort },
+	        ecmp_count);
     }
 
     action set_nhop(bit<48> nhop_dmac, bit<32> nhop_ipv4, bit<9> port) {
         hdr.out_ethernet.dstAddr = nhop_dmac;
         meta.ipv4_metadata.lkp_ipv4_da = nhop_ipv4;
         hdr.ipv4.dstAddr = nhop_ipv4;
-        ig_tm_md.ucast_egress_port = port;
+        standard_metadata.egress_spec = port;
         hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
     }
 
@@ -396,7 +385,7 @@ control SwitchIngress(
 
 //SF3_ipv4 actions
     action send(PortId_t port) {
-        ig_tm_md.ucast_egress_port = port;
+        standard_metadata.egress_spec = port;
         meta.metadata_si = meta.metadata_si - 1;
     }
 
@@ -406,7 +395,8 @@ control SwitchIngress(
 
     action forward(bit<9> port) {
         meta.metadata_si = meta.metadata_si - 1;
-        ig_tm_md.ucast_egress_port = port; ///
+        standard_metadata.egress_spec = port;
+ ///
     }
     
     action sff_forward() {
@@ -419,7 +409,7 @@ control SwitchIngress(
     }
 
     action loopback() {  
-        ig_tm_md.ucast_egress_port = 68;
+        recirculate(meta);
         hdr.nsh.spi = meta.metadata_spi;
         hdr.nsh.si = meta.metadata_si;
         hdr.ipv4.srcAddr = meta.ipv4_metadata.lkp_ipv4_sa;
@@ -549,7 +539,7 @@ control SwitchIngress(
     }
     table send_frame {
         key = {
-            ig_tm_md.ucast_egress_port: exact;
+            standard_metadata.egress_spec: exact;
             meta.metadata_spi: exact;
             meta.metadata_si: exact;
         }
@@ -629,7 +619,7 @@ control SwitchIngress(
     }
     table send_frame2 {
         key = {
-            ig_tm_md.ucast_egress_port: exact;
+            standard_metadata.egress_spec: exact;
             meta.metadata_spi: exact;
             meta.metadata_si: exact;
         }
@@ -643,9 +633,6 @@ control SwitchIngress(
 // apply
 
     apply{
-        if(ig_intr_md.ingress_port != 68){
-            hdr.in_ethernet.srcAddr = ig_prsr_md.global_tstamp;
-        }
         meta.nat_metadata.ingress_nat_mode = 1;
         change_hdr_to_meta(); //
 
@@ -703,41 +690,6 @@ control SwitchIngressDeparser(
 ****************  E G R E S S   P R O C E S S I N G   *******************
 *************************************************************************/
 
-parser EgressParser(
-	packet_in packet,
-	out headers hdr,
-	out metadata_t meta,
-	out egress_intrinsic_metadata_t eg_intr_md){
-
-	state start {
- 		packet.extract(eg_intr_md);
-        transition parse_out_ethernet;
-	}
-   
-    state parse_out_ethernet {
-        packet.extract(hdr.out_ethernet);
-        transition select(hdr.out_ethernet.etherType) {
-            TYPE_NSH: parse_nsh;
-            default: accept;
-        }
-    }
-    
-    state parse_nsh {
-        packet.extract(hdr.nsh);
-        transition select(hdr.nsh.Nextpro) {
-            TYPE_ETHER: parse_in_ethernet;
-            default: accept;
-        }
-    }
-
-    state parse_in_ethernet {
-        packet.extract(hdr.in_ethernet);
-        transition accept;
-        
-    }
-
-}
-
 control Egress(
 	inout headers hdr,
 	inout metadata_t meta,
@@ -770,11 +722,9 @@ control EgressDeparser(
 ***********************  S W I T C H  *******************************
 *************************************************************************/
 
-Pipeline(SwitchIngressParser(),
-         SwitchIngress(),
-         SwitchIngressDeparser(),
-         EgressParser(),
-         Egress(),
-         EgressDeparser()) pipe;
-
-Switch(pipe) main;
+V1Switch(
+    Parser(),
+    Ingress(),
+    Egress(),
+    Deparser()
+) main;
