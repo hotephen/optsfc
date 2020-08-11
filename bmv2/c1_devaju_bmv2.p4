@@ -356,7 +356,6 @@ control SwitchIngress(
     }
 
 //SF2_LB actions
-    Hash<bit<16>>(HashAlgorithm_t.CRC16) hash;
  
     action set_ecmp_select(bit<16> ecmp_base, bit<16> ecmp_count) {
         hash(meta.ecmp_select,
